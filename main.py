@@ -3,28 +3,13 @@ import heapq
 def parallel_processing(n, m, data):
     output = []
     threads = [(0,i) for i in range(n)]
-    heapq.heapify(threads)
+    start = [0] * m
 
     jobs = [(t, i) for i, t in enumerate(data)]
-    output = []
-
-    while jobs:
-        t, i = jobs.pop(0)
-
-        finish_time, thread = heapq.heappop(threads)
-        start_time = max(finish_time, t)
-        finish_time = start_time + t
-        output.append((thread, start_time))
-
-        heapq.heappush(threads, (finish_time, thread))
-
-        while jobs and threads:
-            t, i = jobs.pop(0)
-            finish_time, thread = heapq.heappop(threads)
-            start_time = max(finish_time, t)
-            finish_time = start_time + t
-            output.append((thread, start_time))
-            heapq.heappush(threads, (finish_time, thread))
+    for i in range(n, m+n):
+        time, job = heapq.heappop(theads)
+        output.append((job, start[job]))
+        heapq.heappush(threads, (time + data[job], job))
 
     return output
 
@@ -34,8 +19,8 @@ def main():
 
     result = parallel_processing(n, m, data)
 
-    for thread, time in result:
-        print(thread, time)
+    for couple in result:
+        print(couple[0], couple[0])
 
 if __name__ == "__main__":
     main()
