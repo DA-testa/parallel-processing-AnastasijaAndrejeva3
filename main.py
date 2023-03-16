@@ -9,6 +9,7 @@ def parallel_processing(n, m, data):
     for i in range(n, m+n):
         time, job = heapq.heappop(threads)
         output.append((job, start[job]))
+        start[job] = time
         heapq.heappush(threads, (time + data[job], job))
 
     return output
