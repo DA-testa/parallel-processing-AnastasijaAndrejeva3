@@ -1,3 +1,4 @@
+# Anastasija Andrejeva, 18. grupa, 221RDC028
 import heapq
 
 def parallel_processing(n, m, data):
