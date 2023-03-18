@@ -3,14 +3,14 @@ import heapq
 def parallel_processing(n, m, data):
     output = []
     threads = [(0,i) for i in range(n)]
+    heapq.heapify(threads)
     start = [0] * m
 
-    jobs = [(t, i) for i, t in enumerate(data)]
-    for i in range(n, m+n):
+    for i in range(m):
         time, job = heapq.heappop(threads)
         output.append((job, start[job]))
-        start[job] = time
-        heapq.heappush(threads, (time + data[job], job))
+        start[job] += data
+        heapq.heappush(threads, (start[job], job))
 
     return output
 
